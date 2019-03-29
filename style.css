@@ -1,0 +1,15 @@
+#pane{
+
+    -fx-background-image: url("clearsky.jpg");
+    -fx-background-repeat: no-repeat;   
+    
+    -fx-background-size: cover;
+    -fx-background-position-x: right; 
+    -fx-background-position-y: right;
+
+
+
+
+
+
+}

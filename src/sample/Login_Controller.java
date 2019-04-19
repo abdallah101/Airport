@@ -1,6 +1,5 @@
 package sample;
 
-import Connectivity.ConnectionClass;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -10,15 +9,18 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import java.sql.SQLException;
-import java.sql.Connection;
-import java.sql.Statement;
-import java.sql.ResultSet;
+
+import java.io.*;
+import java.net.Socket;
 
 public class Login_Controller {
     public PasswordField PassField;
     public TextField EmailBox;
     public Text Failure;
+    public boolean found;
+    //private DataInputStream datain;
+    private Socket client;
+    //private DataOutputStream dataout;
 
     public void registerhere(ActionEvent actionEvent) throws Exception {
 
@@ -28,21 +30,53 @@ public class Login_Controller {
         window.show();
     }
 
-    public void Login (ActionEvent action1) throws Exception {
+    public void Login (ActionEvent action1) throws Exception, IOException {
 
-        //Setting connection
-        ConnectionClass connectionclass = new ConnectionClass();
-        Connection connection = connectionclass.getConnection();
+        String serverName = "localhost";
+        int port = Integer.parseInt("6066");
+        try {
+            System.out.println("Connecting to " + serverName + " on port " + port);
 
-        //Getting Username and password from login screen
-        String SQL = "SELECT Username, Password FROM USER WHERE Username = '"+EmailBox.getText()+"' && Password = '"+PassField.getText()+"' ";
-        Statement stmt = connection.createStatement();
+            client = new Socket(serverName, port);
+            System.out.println("Connection Successful");
 
-        //setting a boolean to true if login and password combination is found
-        ResultSet rs = stmt.executeQuery(SQL);
+            //Sending output
+            OutputStream outToServer = client.getOutputStream();
+            DataOutputStream out = new DataOutputStream(outToServer);
+            out.writeUTF(EmailBox.getText() + "\n" + PassField.getText());
+            System.out.println("output sent");
+
+            //Getting input
+
+
+            DataInputStream in = new DataInputStream(client.getInputStream());
+            //DataInputStream in = new DataInputStream(new BufferedInputStream(client.getInputStream()));
+            found = in.readBoolean();
+//            if(in.available()== 0)
+//            {
+//                System.out.println("Failed to get input");
+//            }
+//            else
+//            {
+//                System.out.println(in.readUTF());
+//            }
+
+            //System.out.println("Server input received");
+
+            //client.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
+
+
+
 
         //if combination not found or at least one of the boxes is empty then fail
-        if(!rs.next() || EmailBox.getText().isEmpty() || PassField.getText().isEmpty())
+        if( found == false || EmailBox.getText().isEmpty() || PassField.getText().isEmpty())
         {
             Failure.setText("Username or Password Incorrect, Try Again.");
         }

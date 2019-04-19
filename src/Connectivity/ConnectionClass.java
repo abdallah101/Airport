@@ -21,4 +21,12 @@ public Connection connection;
         }
         return connection;
     }
+
+//    public static void main(String [] args)
+//    {
+//        ConnectionClass conclass = new ConnectionClass();
+//        Connection con;
+//        con = conclass.getConnection();
+//
+//    }
 }

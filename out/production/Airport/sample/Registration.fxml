@@ -36,6 +36,6 @@
       <CheckBox fx:id="NotRobot" layoutX="181.0" layoutY="275.0" mnemonicParsing="false" text="Check here to confirm you are not a robot" />
       <Button layoutX="304.0" layoutY="339.0" mnemonicParsing="false" onAction="#submit" text="Register" />
       <Button layoutX="26.0" layoutY="352.0" mnemonicParsing="false" onAction="#Back2Login" text="Back" />
-      <Text fx:id="batata" layoutX="212.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="200.800048828125" />
+      <Text fx:id="indicator" layoutX="212.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="200.800048828125" />
    </children>
 </AnchorPane>

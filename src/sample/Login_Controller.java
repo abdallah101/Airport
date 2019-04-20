@@ -1,6 +1,8 @@
 package sample;
 
+import com.sun.deploy.ref.AppModel;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -9,7 +11,9 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
+import sample.Ports_Controller;
+import sample.objects.User;
+import sample.objects.Appmodel;
 import java.io.*;
 import java.net.Socket;
 
@@ -18,9 +22,11 @@ public class Login_Controller {
     public TextField EmailBox;
     public Text Failure;
     public boolean found;
-    //private DataInputStream datain;
     private Socket client;
-    //private DataOutputStream dataout;
+    private User model ;
+
+
+
 
     public void registerhere(ActionEvent actionEvent) throws Exception {
 
@@ -73,6 +79,12 @@ public class Login_Controller {
             Parent ports = FXMLLoader.load(getClass().getResource("ports.fxml"));
             Stage window = (Stage)((Node)action1.getSource()).getScene().getWindow();
             window.setScene(new Scene(ports, 600, 500));
+            window.show();
+
         }
+
+
     }
+
+
 }

@@ -134,28 +134,53 @@ public class GreetingServer extends Thread {
 
                     try {
                         BufferedReader reader = new BufferedReader(new StringReader(datain.readUTF()));
-                        login = check(reader.readLine(),reader.readLine());
+                        int command = Integer.parseInt(reader.readLine());
+                        System.out.println(command);
+                        if(command == 1)
+                        {
+                            String username = reader.readLine();
+                            String password = reader.readLine();
+                            System.out.println(username);
+                            System.out.println(password);
+                            login = check(username, password);
+                            dataout.writeBoolean(login);
+                            dataout.flush();
+                        }
+                        else if (command == 2)
+                        {
+                            String username = reader.readLine();
+                            String password = reader.readLine();
+                            String fullName = reader.readLine();
+                            System.out.println(username);
+                            System.out.println(password);
+                            System.out.println(fullName);
+                            login = register(username, password, fullName);
+                            dataout.writeBoolean(login);
+                            dataout.flush();
+                        }
+                        else
+                        {
+                            conversationActive = false;
+                        }
 
-                        dataout.writeBoolean(login);
-                        dataout.flush();
+                    }
 
-                    } catch (IOException e)
-                    {} catch (SQLException e) {
+                    catch (IOException e) {}
+                    catch (SQLException e)
+                    {
                         e.printStackTrace();
                     }
 
-                        try {
-                        dataout.close();
-                        datain.close();
-                        socket.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
                         conversationActive = false;
-
-
-
                 }
+            try {
+                dataout.close();
+                datain.close();
+                socket.close();
+                System.out.println("Connection close");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         private boolean check (String username, String password) throws SQLException
@@ -196,6 +221,42 @@ public class GreetingServer extends Thread {
 
         }
 
+        private boolean register(String username, String password, String fullName) throws SQLException
+        {
+            String dbname = "airportdb";
+            String usernamedb = "root";
+            String passworddb = "";
+            //Creating Connection
+            Connection connection = null;
+            try {
+                connection = DriverManager.getConnection(dbURL, usernamedb, passworddb);
+            }catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
+
+            //prepare statement for executing update
+            String insert="INSERT INTO USER (Username,Password,Name) VALUES('"+username+"','"+password+"','"+fullName+"')";
+            Statement statement = connection.createStatement();
+
+            //Getting a boolean to whether the username is already being used
+            String SQL = "SELECT Username, Password FROM USER WHERE Username = '"+username+"'";
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(SQL);
+
+            if (rs.next())
+            {
+                System.out.println("Username Already Being Used");
+                return false;
+            }
+            else
+            {
+                System.out.println("database updated with new user");
+                statement.executeUpdate(insert);
+                return true;
+            }
+
+        }
         }
     }
 

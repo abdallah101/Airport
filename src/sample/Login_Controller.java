@@ -43,37 +43,24 @@ public class Login_Controller {
             //Sending output
             OutputStream outToServer = client.getOutputStream();
             DataOutputStream out = new DataOutputStream(outToServer);
-            out.writeUTF(EmailBox.getText() + "\n" + PassField.getText());
+            out.writeUTF("1" + "\n" + EmailBox.getText() + "\n" + PassField.getText());
             System.out.println("output sent");
 
             //Getting input
 
 
             DataInputStream in = new DataInputStream(client.getInputStream());
-            //DataInputStream in = new DataInputStream(new BufferedInputStream(client.getInputStream()));
+
             found = in.readBoolean();
-//            if(in.available()== 0)
-//            {
-//                System.out.println("Failed to get input");
-//            }
-//            else
-//            {
-//                System.out.println(in.readUTF());
-//            }
-
-            //System.out.println("Server input received");
-
-            //client.close();
+            
+            out.close();
+            in.close();
+            client.close();
+            System.out.println("Connection closed");
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-
-
-
-
 
         //if combination not found or at least one of the boxes is empty then fail
         if( found == false || EmailBox.getText().isEmpty() || PassField.getText().isEmpty())

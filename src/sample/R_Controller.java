@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -10,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
+import javafx.util.Duration;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -29,6 +31,7 @@ public class R_Controller {
         Parent root = FXMLLoader.load(getClass().getResource("javafx.fxml"));
         Stage window = (Stage)((Node)goback.getSource()).getScene().getWindow();
         window.setScene(new Scene(root, 600, 500));
+        window.setResizable(false);
         window.show();
     }
 
@@ -38,11 +41,11 @@ public class R_Controller {
 
         if (R_Email.getText().isEmpty() || R_Name.getText().isEmpty() || R_Password.getText().isEmpty())
         {
-            indicator.setText("One or more fields is empty");
+            disError("One or more fields is empty");
         }
         else if (!NotRobot.isSelected())
         {
-            indicator.setText("Check Box First Please!");
+            disError("Check Box First Please!");
         }
         else {
             String serverName = "localhost";
@@ -63,20 +66,28 @@ public class R_Controller {
 
             if (reg == false)
             {
-                indicator.setText("Username already being used, try again.");
+                disError("Username already being used, try again.");
             }
             else
             {
-                System.out.println("User successfully registered");
                 Parent root = FXMLLoader.load(getClass().getResource("Reg_success.fxml"));
                 Stage window = (Stage) ((Node) sub.getSource()).getScene().getWindow();
                 window.setScene(new Scene(root, 600, 500));
+                window.setResizable(false);
                 window.show();
             }
 
         }
 
 
+    }
+    public void disError (String error)
+    {
+        indicator.setText(error);
+        PauseTransition visiblePause = new PauseTransition(Duration.seconds(4));
+        visiblePause.setOnFinished(e -> { indicator.setVisible(false); });
+        visiblePause.play();
+        indicator.setVisible(true);
     }
 
 

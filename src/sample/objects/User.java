@@ -9,7 +9,12 @@ import java.util.TimerTask;
 public class User {
 
 
-    private String username = null;
+    public String username = null;
+
+    public User (String username)
+    {
+        this.username = username;
+    }
 
     public void setUser(String username) {
         this.username = username;

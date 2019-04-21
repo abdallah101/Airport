@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -9,14 +10,14 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Ports_Controller">
    <children>
-      <Text fill="RED" layoutX="185.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to THE Aiport">
+      <Text fill="RED" layoutX="185.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to THE Airport">
          <font>
             <Font name="Times New Roman Bold" size="22.0" />
          </font>
       </Text>
       <Button layoutX="14.0" layoutY="360.0" mnemonicParsing="false" onAction="#GoBack" text="Logout" />
       <ComboBox fx:id="combobox" layoutX="374.0" layoutY="88.0" onAction="#comboChanged" prefHeight="26.0" prefWidth="200.0" promptText="Select Gate" />
-      <TextField layoutX="76.0" layoutY="88.0" promptText="Search for a time slot" />
+      <TextField fx:id="STime_slot" layoutX="76.0" layoutY="88.0" promptText="Search for a time slot" />
       <Text layoutX="16.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search">
          <font>
             <Font size="17.0" />
@@ -26,5 +27,8 @@
       <ComboBox fx:id="timebox" layoutX="375.0" layoutY="140.0" onAction="#ChangeTimeSlot" prefHeight="26.0" prefWidth="200.0" promptText="Select Time Slot" />
       <Button layoutX="528.0" layoutY="14.0" mnemonicParsing="false" onAction="#refresh" text="Refresh" />
       <Text fx:id="reserve_success" layoutX="360.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="230.34472167491913" />
+      <Button layoutX="530.0" layoutY="360.0" mnemonicParsing="false" onAction="#History" text="History" />
+      <ListView fx:id="listview" layoutX="50.0" layoutY="126.0" prefHeight="200.0" prefWidth="200.0" />
+      <Button layoutX="234.0" layoutY="88.0" mnemonicParsing="false" onAction="#GO" text="Go" />
    </children>
 </AnchorPane>

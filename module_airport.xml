@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_airport" default="compile.module.airport">
+  <dirname property="module.airport.basedir" file="${ant.file.module_airport}"/>
+  
+  <property name="module.jdk.home.airport" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.airport" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.airport" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.airport" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="airport.output.dir" value="${module.airport.basedir}/out/production/Airport"/>
+  <property name="airport.testoutput.dir" value="${module.airport.basedir}/out/test/Airport"/>
+  
+  <path id="airport.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="airport.module.production.classpath">
+    <path refid="${module.jdk.classpath.airport}"/>
+    <path refid="library.lib.classpath"/>
+    <pathelement location="${basedir}/../javax.json.jar"/>
+    <path refid="library.mysql-connector-java-8.0.15.classpath"/>
+  </path>
+  
+  <path id="airport.runtime.production.module.classpath">
+    <pathelement location="${airport.output.dir}"/>
+    <path refid="library.lib.classpath"/>
+    <pathelement location="${basedir}/../javax.json.jar"/>
+    <path refid="library.mysql-connector-java-8.0.15.classpath"/>
+  </path>
+  
+  <path id="airport.module.classpath">
+    <path refid="${module.jdk.classpath.airport}"/>
+    <pathelement location="${airport.output.dir}"/>
+    <path refid="library.lib.classpath"/>
+    <pathelement location="${basedir}/../javax.json.jar"/>
+    <path refid="library.mysql-connector-java-8.0.15.classpath"/>
+  </path>
+  
+  <path id="airport.runtime.module.classpath">
+    <pathelement location="${airport.testoutput.dir}"/>
+    <pathelement location="${airport.output.dir}"/>
+    <path refid="library.lib.classpath"/>
+    <pathelement location="${basedir}/../javax.json.jar"/>
+    <path refid="library.mysql-connector-java-8.0.15.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.airport">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.airport">
+    <patternset refid="excluded.from.module.airport"/>
+  </patternset>
+  
+  <path id="airport.module.sourcepath">
+    <dirset dir="${module.airport.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.airport" depends="compile.module.airport.production,compile.module.airport.tests" description="Compile module Airport"/>
+  
+  <target name="compile.module.airport.production" depends="register.custom.compilers" description="Compile module Airport; production classes">
+    <mkdir dir="${airport.output.dir}"/>
+    <javac2 destdir="${airport.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.airport}/javac">
+      <compilerarg line="${compiler.args.airport}"/>
+      <bootclasspath refid="airport.module.bootclasspath"/>
+      <classpath refid="airport.module.production.classpath"/>
+      <src refid="airport.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.airport"/>
+    </javac2>
+    
+    <copy todir="${airport.output.dir}">
+      <fileset dir="${module.airport.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.airport.tests" depends="register.custom.compilers,compile.module.airport.production" description="compile module Airport; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.airport" description="cleanup module">
+    <delete dir="${airport.output.dir}"/>
+    <delete dir="${airport.testoutput.dir}"/>
+  </target>
+</project>

@@ -18,15 +18,13 @@
       <Button layoutX="14.0" layoutY="360.0" mnemonicParsing="false" onAction="#GoBack" text="Logout" />
       <ComboBox fx:id="combobox" layoutX="374.0" layoutY="88.0" onAction="#comboChanged" prefHeight="26.0" prefWidth="200.0" promptText="Select Gate" />
       <TextField fx:id="STime_slot" layoutX="76.0" layoutY="88.0" promptText="Search for a time slot" />
-      <Button layoutX="421.0" layoutY="187.0" mnemonicParsing="false" onAction="#CtimeSlots" text="Reserve time slot" />
+      <Button layoutX="421.0" layoutY="273.0" mnemonicParsing="false" onAction="#CtimeSlots" text="Reserve time slot" />
       <ComboBox fx:id="timebox" layoutX="375.0" layoutY="140.0" onAction="#ChangeTimeSlot" prefHeight="26.0" prefWidth="200.0" promptText="Select Time Slot" />
       <Button layoutX="528.0" layoutY="14.0" mnemonicParsing="false" onAction="#refresh" text="Refresh" />
-      <Text fx:id="reserve_success" layoutX="360.0" layoutY="245.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="230.34472167491913" />
+      <Text fx:id="reserve_success" layoutX="359.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="230.34472167491913" />
       <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#History" text="History" />
       <ListView fx:id="listview" layoutX="76.0" layoutY="126.0" prefHeight="200.0" prefWidth="191.0" />
       <Button layoutX="234.0" layoutY="88.0" mnemonicParsing="false" onAction="#GO" text="Go" />
       <Button layoutX="113.0" layoutY="334.0" mnemonicParsing="false" onAction="#Transfer" text="Transfer to Reserve" />
-      <ComboBox fx:id="removeRes" layoutX="399.0" layoutY="290.0" prefWidth="150.0" />
-      <Button layoutX="412.0" layoutY="334.0" mnemonicParsing="false" text="Remove Reservation" />
    </children>
 </AnchorPane>

@@ -26,7 +26,7 @@
       <ListView fx:id="listview" layoutX="76.0" layoutY="126.0" prefHeight="200.0" prefWidth="191.0" />
       <Button layoutX="234.0" layoutY="88.0" mnemonicParsing="false" onAction="#GO" text="Go" />
       <Button layoutX="113.0" layoutY="334.0" mnemonicParsing="false" onAction="#Transfer" text="Transfer to Reserve" />
-      <ComboBox fx:id="removeRes" layoutX="399.0" layoutY="290.0" prefWidth="150.0" />
-      <Button layoutX="412.0" layoutY="334.0" mnemonicParsing="false" text="Remove Reservation" />
+      <ComboBox fx:id="removeRes" layoutX="318.0" layoutY="299.0" onAction="#resChanged" prefHeight="26.0" prefWidth="262.0" promptText="Select Reservation" />
+      <Button layoutX="387.0" layoutY="347.0" mnemonicParsing="false" onAction="#removeReservation" text="Remove Reservation" />
    </children>
 </AnchorPane>

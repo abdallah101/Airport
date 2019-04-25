@@ -29,7 +29,9 @@ import java.util.ResourceBundle;
 
 public class Ports_Controller implements Initializable {
 
+    public String GATER;
     public String GATE;
+    public String TIMER;
     public String TIMESLOT;
     public Text reserve_success;
     public TextField STime_slot;
@@ -59,6 +61,7 @@ public class Ports_Controller implements Initializable {
     ObservableList<String> list = FXCollections.observableArrayList("Gate one", "Gate two", "Gate three", "Gate four", "Gate five", "Gate six", "Gate seven", "Gate eight"
     ,"Gate nine", "Gate ten");
     ObservableList<String> gatess = FXCollections.observableArrayList();
+    ObservableList<String> reservedTime = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources)
@@ -176,19 +179,187 @@ public class Ports_Controller implements Initializable {
 
             out.close();
             in.close();
-
-
-
-
-
-
             client.close();
             System.out.println("Refreshed");
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        try {
+
+
+            String result = GetRes();
+
+            System.out.println(result);
+            BufferedReader r = new BufferedReader(new StringReader(result));
+
+            r.readLine();
+            String reservations = r.readLine();
+
+
+            System.out.println("Seeing reservations: " + reservations);
+            reservedTime.clear();
+            while (reservations != null)
+            {
+
+                if(Integer.parseInt(reservations) == 1)
+                {
+                    reservations = r.readLine();
+                    if (Integer.parseInt(reservations) == 4)
+                    {reservedTime.addAll("Gate one 12am to 4am");}
+                    else if (Integer.parseInt(reservations) == 8)
+                    {reservedTime.addAll("Gate one 4am to 8am");}
+                    else if (Integer.parseInt(reservations) == 12)
+                    {reservedTime.addAll("Gate one 8am to 12pm");}
+                    else if (Integer.parseInt(reservations) == 16)
+                    {reservedTime.addAll("Gate one 12pm to 4pm");}
+                    else if (Integer.parseInt(reservations) == 20)
+                    {reservedTime.addAll("Gate one 4pm to 8pm");}
+                    else if (Integer.parseInt(reservations) == 24)
+                    {reservedTime.addAll("Gate one 8pm to 12am");}
+                }
+                else if (Integer.parseInt(reservations) == 2)
+                {
+                    reservations = r.readLine();
+                    if (Integer.parseInt(reservations) == 4)
+                    {reservedTime.addAll("Gate two 12am to 4am");}
+                    else if (Integer.parseInt(reservations) == 8)
+                    {reservedTime.addAll("Gate two 4am to 8am");}
+                    else if (Integer.parseInt(reservations) == 12)
+                    {reservedTime.addAll("Gate two 8am to 12pm");}
+                    else if (Integer.parseInt(reservations) == 16)
+                    {reservedTime.addAll("Gate two 12pm to 4pm");}
+                    else if (Integer.parseInt(reservations) == 20)
+                    {reservedTime.addAll("Gate two 4pm to 8pm");}
+                    else if (Integer.parseInt(reservations) == 24)
+                    {reservedTime.addAll("Gate two 8pm to 12am");}
+                }
+                else if (Integer.parseInt(reservations) == 3)
+                {reservations = r.readLine();
+                    if (Integer.parseInt(reservations) == 4)
+                    {reservedTime.addAll("Gate three 12am to 4am");}
+                    else if (Integer.parseInt(reservations) == 8)
+                    {reservedTime.addAll("Gate three 4am to 8am");}
+                    else if (Integer.parseInt(reservations) == 12)
+                    {reservedTime.addAll("Gate three 8am to 12pm");}
+                    else if (Integer.parseInt(reservations) == 16)
+                    {reservedTime.addAll("Gate three 12pm to 4pm");}
+                    else if (Integer.parseInt(reservations) == 20)
+                    {reservedTime.addAll("Gate three 4pm to 8pm");}
+                    else if (Integer.parseInt(reservations) == 24)
+                    {reservedTime.addAll("Gate three 8pm to 12am");}}
+                else if (Integer.parseInt(reservations) == 4)
+                {reservations = r.readLine();
+                    if (Integer.parseInt(reservations) == 4)
+                    {reservedTime.addAll("Gate four 12am to 4am");}
+                    else if (Integer.parseInt(reservations) == 8)
+                    {reservedTime.addAll("Gate four 4am to 8am");}
+                    else if (Integer.parseInt(reservations) == 12)
+                    {reservedTime.addAll("Gate four 8am to 12pm");}
+                    else if (Integer.parseInt(reservations) == 16)
+                    {reservedTime.addAll("Gate four 12pm to 4pm");}
+                    else if (Integer.parseInt(reservations) == 20)
+                    {reservedTime.addAll("Gate four 4pm to 8pm");}
+                    else if (Integer.parseInt(reservations) == 24)
+                    {reservedTime.addAll("Gate four 8pm to 12am");}}
+                else if (Integer.parseInt(reservations) == 5)
+                {reservations = r.readLine();
+                    if (Integer.parseInt(reservations) == 4)
+                    {reservedTime.addAll("Gate five 12am to 4am");}
+                    else if (Integer.parseInt(reservations) == 8)
+                    {reservedTime.addAll("Gate five 4am to 8am");}
+                    else if (Integer.parseInt(reservations) == 12)
+                    {reservedTime.addAll("Gate five 8am to 12pm");}
+                    else if (Integer.parseInt(reservations) == 16)
+                    {reservedTime.addAll("Gate five 12pm to 4pm");}
+                    else if (Integer.parseInt(reservations) == 20)
+                    {reservedTime.addAll("Gate five 4pm to 8pm");}
+                    else if (Integer.parseInt(reservations) == 24)
+                    {reservedTime.addAll("Gate five 8pm to 12am");}}
+                else if (Integer.parseInt(reservations) == 6)
+                {reservations = r.readLine();
+                    if (Integer.parseInt(reservations) == 4)
+                    {reservedTime.addAll("Gate six 12am to 4am");}
+                    else if (Integer.parseInt(reservations) == 8)
+                    {reservedTime.addAll("Gate six 4am to 8am");}
+                    else if (Integer.parseInt(reservations) == 12)
+                    {reservedTime.addAll("Gate six 8am to 12pm");}
+                    else if (Integer.parseInt(reservations) == 16)
+                    {reservedTime.addAll("Gate six 12pm to 4pm");}
+                    else if (Integer.parseInt(reservations) == 20)
+                    {reservedTime.addAll("Gate six 4pm to 8pm");}
+                    else if (Integer.parseInt(reservations) == 24)
+                    {reservedTime.addAll("Gate six 8pm to 12am");}}
+                else if (Integer.parseInt(reservations) == 7)
+                {reservations = r.readLine();
+                    if (Integer.parseInt(reservations) == 4)
+                    {reservedTime.addAll("Gate seven 12am to 4am");}
+                    else if (Integer.parseInt(reservations) == 8)
+                    {reservedTime.addAll("Gate seven 4am to 8am");}
+                    else if (Integer.parseInt(reservations) == 12)
+                    {reservedTime.addAll("Gate seven 8am to 12pm");}
+                    else if (Integer.parseInt(reservations) == 16)
+                    {reservedTime.addAll("Gate seven 12pm to 4pm");}
+                    else if (Integer.parseInt(reservations) == 20)
+                    {reservedTime.addAll("Gate seven 4pm to 8pm");}
+                    else if (Integer.parseInt(reservations) == 24)
+                    {reservedTime.addAll("Gate seven 8pm to 12am");}}
+                else if (Integer.parseInt(reservations) == 8)
+                {reservations = r.readLine();
+                    if (Integer.parseInt(reservations) == 4)
+                    {reservedTime.addAll("Gate eight 12am to 4am");}
+                    else if (Integer.parseInt(reservations) == 8)
+                    {reservedTime.addAll("Gate eight 4am to 8am");}
+                    else if (Integer.parseInt(reservations) == 12)
+                    {reservedTime.addAll("Gate eight 8am to 12pm");}
+                    else if (Integer.parseInt(reservations) == 16)
+                    {reservedTime.addAll("Gate eight 12pm to 4pm");}
+                    else if (Integer.parseInt(reservations) == 20)
+                    {reservedTime.addAll("Gate eight 4pm to 8pm");}
+                    else if (Integer.parseInt(reservations) == 24)
+                    {reservedTime.addAll("Gate eight 8pm to 12am");}}
+                else if (Integer.parseInt(reservations) == 9)
+                {reservations = r.readLine();
+                    if (Integer.parseInt(reservations) == 4)
+                    {reservedTime.addAll("Gate nine 12am to 4am");}
+                    else if (Integer.parseInt(reservations) == 8)
+                    {reservedTime.addAll("Gate nine 4am to 8am");}
+                    else if (Integer.parseInt(reservations) == 12)
+                    {reservedTime.addAll("Gate nine 8am to 12pm");}
+                    else if (Integer.parseInt(reservations) == 16)
+                    {reservedTime.addAll("Gate nine 12pm to 4pm");}
+                    else if (Integer.parseInt(reservations) == 20)
+                    {reservedTime.addAll("Gate nine 4pm to 8pm");}
+                    else if (Integer.parseInt(reservations) == 24)
+                    {reservedTime.addAll("Gate nine 8pm to 12am");}}
+                else if (Integer.parseInt(reservations) == 10)
+                {reservations = r.readLine();
+                    if (Integer.parseInt(reservations) == 4)
+                    {reservedTime.addAll("Gate ten 12am to 4am");}
+                    else if (Integer.parseInt(reservations) == 8)
+                    {reservedTime.addAll("Gate ten 4am to 8am");}
+                    else if (Integer.parseInt(reservations) == 12)
+                    {reservedTime.addAll("Gate ten 8am to 12pm");}
+                    else if (Integer.parseInt(reservations) == 16)
+                    {reservedTime.addAll("Gate ten 12pm to 4pm");}
+                    else if (Integer.parseInt(reservations) == 20)
+                    {reservedTime.addAll("Gate ten 4pm to 8pm");}
+                    else if (Integer.parseInt(reservations) == 24)
+                    {reservedTime.addAll("Gate ten 8pm to 12am");}}
+                reservations = r.readLine();
+            }
+
+            //removeRes.getItems().clear();
+            removeRes.setItems(reservedTime);
+
+        }catch (IOException e)
+        {e.printStackTrace();}
+
+
     }
+
+
 
     public void comboChanged (ActionEvent change)
     {
@@ -345,14 +516,12 @@ public class Ports_Controller implements Initializable {
         sc.setFitToHeight(true);
         sc.setFitToWidth(true);
         sc.setContent(browser);
-//        sc.fitToHeightProperty(true);
-//        sc.fitToWidthProperty();
 
         we.loadContent(getLogFiles());
         VBox vb = new VBox(10);
         vb.getChildren().add(sc);
 
-        Scene scene = new Scene(vb,500,500);
+        Scene scene = new Scene(vb,800,500);
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
@@ -452,6 +621,46 @@ public class Ports_Controller implements Initializable {
         return history;
     }
 
+    public String getLogFilesForRemove ()
+    {
+        String history = null;
+        String temp= null;
+        String serverName = "localhost";
+        int port = Integer.parseInt("6066");
+        try {
+            Socket client = new Socket(serverName, port);
+
+            //Sending output
+            OutputStream outToServer = client.getOutputStream();
+            DataOutputStream out = new DataOutputStream(outToServer);
+            out.writeUTF("8" + "\n" + currentUser.getUsername());
+            System.out.println("here");
+            //Getting input
+            DataInputStream in = new DataInputStream(client.getInputStream());
+            String re = in.readUTF();
+            BufferedReader reader = new BufferedReader(new StringReader(re));
+
+            history = reader.readLine();
+            while (true)
+            {
+                temp = reader.readLine();
+                if(temp == null)
+                {
+                    break;
+                }
+                history = history + "\n" + temp;
+
+            }
+            out.close();
+            in.close();
+            client.close();
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return history;
+    }
     public void GO (ActionEvent event)
     {
         String serverName = "localhost";
@@ -507,7 +716,7 @@ public class Ports_Controller implements Initializable {
                     }
 
                     else {
-                        gatess.add("Error, dont mind this");
+                        gatess.addAll("Error, dont mind this");
                     }
                     temp = reader.readLine();
                 }
@@ -626,19 +835,183 @@ public class Ports_Controller implements Initializable {
         {
             disError("Your timeslot is invalid");
         }
-
-
-
-
-
     }
 
 
-//    public void GetRes ()
-//    {
-//
-//    }
+    public String GetRes () throws IOException
+    {
+        String logfiles = getLogFilesForRemove();
+        BufferedReader reader = new BufferedReader(new StringReader(logfiles));
+        String items = reader.readLine();
+        String result = null + "\n";
+        while(items != null) {
 
+            if (items.contains("Gate_one")) {
+                result = result + "1" + "\n";
+                if(items.contains("12am to 4am"))
+                {result = result + "4" + "\n";}
+                else if (items.contains("4am to 8am"))
+                {result = result + "8" + "\n";}
+                else if (items.contains("8am to 12pm"))
+                {result = result + "12" + "\n";}
+                else if (items.contains("12pm to 4pm"))
+                {result = result + "16" + "\n";}
+                else if (items.contains("4pm to 8pm"))
+                {result = result + "20" + "\n";}
+                else if (items.contains("8pm to 12am"))
+                {result = result + "24" + "\n";}
+                else
+                {}
+            } else if (items.contains("Gate_two")) {
+                result = result + "2" + "\n";
+                if(items.contains("12am to 4am"))
+                {result = result + "4" + "\n";}
+                else if (items.contains("4am to 8am"))
+                {result = result + "8" + "\n";}
+                else if (items.contains("8am to 12pm"))
+                {result = result + "12" + "\n";}
+                else if (items.contains("12pm to 4pm"))
+                {result = result + "16" + "\n";}
+                else if (items.contains("4pm to 8pm"))
+                {result = result + "20" + "\n";}
+                else if (items.contains("8pm to 12am"))
+                {result = result + "24" + "\n";}
+                else
+                {}
+            } else if (items.contains("Gate_three")) {
+                result = result + "3" + "\n";
+                if(items.contains("12am to 4am"))
+                {result = result + "4" + "\n";}
+                else if (items.contains("4am to 8am"))
+                {result = result + "8" + "\n";}
+                else if (items.contains("8am to 12pm"))
+                {result = result + "12" + "\n";}
+                else if (items.contains("12pm to 4pm"))
+                {result = result + "16" + "\n";}
+                else if (items.contains("4pm to 8pm"))
+                {result = result + "20" + "\n";}
+                else if (items.contains("8pm to 12am"))
+                {result = result + "24" + "\n";}
+                else
+                {}
+            } else if (items.contains("Gate_four")) {
+                result = result + "4" + "\n";
+                if(items.contains("12am to 4am"))
+                {result = result + "4" + "\n";}
+                else if (items.contains("4am to 8am"))
+                {result = result + "8" + "\n";}
+                else if (items.contains("8am to 12pm"))
+                {result = result + "12" + "\n";}
+                else if (items.contains("12pm to 4pm"))
+                {result = result + "16" + "\n";}
+                else if (items.contains("4pm to 8pm"))
+                {result = result + "20" + "\n";}
+                else if (items.contains("8pm to 12am"))
+                {result = result + "24" + "\n";}
+                else
+                {}
+            } else if (items.contains("Gate_five")) {
+                result = result + "5" + "\n";
+                if(items.contains("12am to 4am"))
+                {result = result + "4" + "\n";}
+                else if (items.contains("4am to 8am"))
+                {result = result + "8" + "\n";}
+                else if (items.contains("8am to 12pm"))
+                {result = result + "12" + "\n";}
+                else if (items.contains("12pm to 4pm"))
+                {result = result + "16" + "\n";}
+                else if (items.contains("4pm to 8pm"))
+                {result = result + "20" + "\n";}
+                else if (items.contains("8pm to 12am"))
+                {result = result + "24" + "\n";}
+                else
+                {}
+            } else if (items.contains("Gate_six")) {
+                result = result + "6" + "\n";
+                if(items.contains("12am to 4am"))
+                {result = result + "4" + "\n";}
+                else if (items.contains("4am to 8am"))
+                {result = result + "8" + "\n";}
+                else if (items.contains("8am to 12pm"))
+                {result = result + "12" + "\n";}
+                else if (items.contains("12pm to 4pm"))
+                {result = result + "16" + "\n";}
+                else if (items.contains("4pm to 8pm"))
+                {result = result + "20" + "\n";}
+                else if (items.contains("8pm to 12am"))
+                {result = result + "24" + "\n";}
+                else
+                {}
+            } else if (items.contains("Gate_seven")) {
+                result = result + "7" + "\n";
+                if(items.contains("12am to 4am"))
+                {result = result + "4" + "\n";}
+                else if (items.contains("4am to 8am"))
+                {result = result + "8" + "\n";}
+                else if (items.contains("8am to 12pm"))
+                {result = result + "12" + "\n";}
+                else if (items.contains("12pm to 4pm"))
+                {result = result + "16" + "\n";}
+                else if (items.contains("4pm to 8pm"))
+                {result = result + "20" + "\n";}
+                else if (items.contains("8pm to 12am"))
+                {result = result + "24" + "\n";}
+                else
+                {}
+            } else if (items.contains("Gate_eight")) {
+                result = result + "8" + "\n";
+                if(items.contains("12am to 4am"))
+                {result = result + "4" + "\n";}
+                else if (items.contains("4am to 8am"))
+                {result = result + "8" + "\n";}
+                else if (items.contains("8am to 12pm"))
+                {result = result + "12" + "\n";}
+                else if (items.contains("12pm to 4pm"))
+                {result = result + "16" + "\n";}
+                else if (items.contains("4pm to 8pm"))
+                {result = result + "20" + "\n";}
+                else if (items.contains("8pm to 12am"))
+                {result = result + "24" + "\n";}
+                else
+                {}
+            } else if (items.contains("Gate_nine")) {
+                result = result + "9" + "\n";
+                if(items.contains("12am to 4am"))
+                {result = result + "4" + "\n";}
+                else if (items.contains("4am to 8am"))
+                {result = result + "8" + "\n";}
+                else if (items.contains("8am to 12pm"))
+                {result = result + "12" + "\n";}
+                else if (items.contains("12pm to 4pm"))
+                {result = result + "16" + "\n";}
+                else if (items.contains("4pm to 8pm"))
+                {result = result + "20" + "\n";}
+                else if (items.contains("8pm to 12am"))
+                {result = result + "24" + "\n";}
+                else
+                {}
+            } else if (items.contains("Gate_ten")) {
+                result = result + "10" + "\n";
+                if(items.contains("12am to 4am"))
+                {result = result + "4" + "\n";}
+                else if (items.contains("4am to 8am"))
+                {result = result + "8" + "\n";}
+                else if (items.contains("8am to 12pm"))
+                {result = result + "12" + "\n";}
+                else if (items.contains("12pm to 4pm"))
+                {result = result + "16" + "\n";}
+                else if (items.contains("4pm to 8pm"))
+                {result = result + "20" + "\n";}
+                else if (items.contains("8pm to 12am"))
+                {result = result + "24" + "\n";}
+                else
+                {}
+            } else {
+            }
+            items = reader.readLine();
+        }
+        return result;
+    }
 
     public String converttime (String numb)
     {
@@ -673,5 +1046,99 @@ public class Ports_Controller implements Initializable {
         }
     }
 
+    public void resChanged ()
+    {
+        String sendthis = removeRes.getValue();
 
+        if(sendthis == null)
+        {}
+        else
+        {
+            {
+                if (removeRes.getValue().contains("Gate one")) {
+                    GATER = "1";
+
+                } else if (removeRes.getValue().contains("Gate two")) {
+                    GATER = "2";
+                } else if (sendthis.contains("Gate three")) {
+                    GATER = "3";
+                } else if (sendthis.contains("Gate four")) {
+                    GATER = "4";
+                } else if (sendthis.contains("Gate five")) {
+                    GATER = "5";
+                } else if (sendthis.contains("Gate six")) {
+                    GATER = "6";
+                } else if (sendthis.contains("Gate seven")) {
+                    GATER = "7";
+                } else if (sendthis.contains("Gate eight")) {
+                    GATER = "8";
+                } else if (sendthis.contains("Gate nine")) {
+                    GATER = "9";
+                } else if (sendthis.contains("Gate ten")) {
+                    GATER = "10";
+                } else {
+                    System.out.println("Watch out error here for gates: null value");
+                    GATER = null;
+                }
+
+                if (sendthis.contains("12am to 4am")) {
+                    TIMER = "1";
+
+                } else if (sendthis.contains("4am to 8am")) {
+                    TIMER = "2";
+                } else if (sendthis.contains("8am to 12pm")) {
+                    TIMER = "3";
+                } else if (sendthis.contains("12pm to 4pm")) {
+                    TIMER = "4";
+                } else if (sendthis.contains("4pm to 8pm")) {
+                    TIMER = "5";
+                } else if (sendthis.contains("8pm to 12am")) {
+                    TIMER = "6";
+                } else {
+                    System.out.println("watch out error here for time: null value");
+                    TIMER = null;
+                }
+            }
+        }
+    }
+
+    public void removeReservation (ActionEvent event)
+    {
+        boolean re = false;
+
+        if(GATER == null || TIMER == null)
+        {disError("Error finding reserved gate or time");}
+        else {
+
+            String serverName = "localhost";
+            int port = Integer.parseInt("6066");
+            try {
+                Socket client = new Socket(serverName, port);
+
+                //Sending output
+                OutputStream outToServer = client.getOutputStream();
+                DataOutputStream out = new DataOutputStream(outToServer);
+                out.writeUTF("7" + "\n" + currentUser.getUsername() + "\n" + GATER + "\n" + TIMER);
+
+                //Getting input
+                DataInputStream in = new DataInputStream(client.getInputStream());
+                re = in.readBoolean();
+
+
+                out.close();
+                in.close();
+                client.close();
+                refresh();
+
+                if (!re) {
+                    disError("Failed to remove reservation");
+                } else {
+                    disError("Reservation removed");
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

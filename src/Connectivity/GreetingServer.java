@@ -3,6 +3,7 @@ package Connectivity;
 import sample.Reset;
 
 import java.io.*;
+import java.net.Inet4Address;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
@@ -158,10 +159,23 @@ public class GreetingServer extends Thread
                     else if (command == 6) {
                         output = checkGates(reader.readLine(), reader.readLine());
                         dataout.writeUTF(output);
-                    } else {}
-
+                    }
+                    else if (command == 7)
+                    {
+                        login = removeReservation(reader.readLine(),reader.readLine(),reader.readLine());
+                        dataout.writeBoolean(login);
+                        dataout.flush();
+                    }
+                    else if (command == 8)
+                    {
+                        output = reservations(reader.readLine());
+                        dataout.writeUTF(output);
+                        dataout.flush();
+                    }
+                    else
+                    {
                         conversationActive = false;
-
+                    }
 
 
                 } catch (IOException e) {
@@ -172,6 +186,7 @@ public class GreetingServer extends Thread
                 }
 
                 try {
+                    conversationActive = false;
                     dataout.close();
                     datain.close();
                     socket.close();
@@ -217,7 +232,7 @@ public class GreetingServer extends Thread
             else {
                 DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
                 Date date = new Date();
-                String user1 = "INSERT INTO loghistory(username,date,Interaction, success) VALUES('" + username + "','" + dateFormat.format(date) + "','" + "Login" + "','1')";
+                String user1 = "INSERT INTO loghistory(username,date,Interaction, success) VALUES('" + username + "','" + dateFormat.format(date) + "','" + "Login" + "','0')";
                 Statement stat = conn.createStatement();
                 stat.executeUpdate(user1);
                 conn.close();
@@ -289,12 +304,6 @@ public class GreetingServer extends Thread
                         out = out + rs.getString("Time_slot") + "\n";
                     }
                 }rs.beforeFirst();
-                out = out + "666" + "\n";
-                while (rs.next()) {
-                    if (Integer.parseInt(rs.getString("Gate_six")) == 1) {
-                        out = out + rs.getString("Time_slot") + "\n";
-                    }
-                }rs.beforeFirst();
                 out = out + "777" + "\n";
                 while (rs.next()) {
                     if (Integer.parseInt(rs.getString("Gate_seven")) == 1) {
@@ -315,7 +324,7 @@ public class GreetingServer extends Thread
                 }rs.beforeFirst();
                 out = out + "1000" + "\n";
                 while (rs.next()) {
-                    if (Integer.parseInt(rs.getString("Gate_five")) == 1) {
+                    if (Integer.parseInt(rs.getString("Gate_ten")) == 1) {
                         out = out + rs.getString("Time_slot") + "\n";
                     }
                 }
@@ -510,10 +519,43 @@ public class GreetingServer extends Thread
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
             Date date = new Date();
             String logit = "INSERT INTO loghistory(username,date,Interaction, success) VALUES('" + username + "','"
-                    + dateFormat.format(date) + "','" + "Accessed User History" + "','1')";
+                    + dateFormat.format(date) + "','" + "Accessed User History" + "','0')";
             Statement logitstmt = connection.createStatement();
             logitstmt.executeUpdate(logit);
 
+            return out;
+        }
+
+        public String reservations (String username) throws SQLException {
+            String out = null;
+            String dbname = "airportdb";
+            String usernamedb = "root";
+            String passworddb = "";
+            //Creating Connection
+            Connection connection = null;
+            try {
+                connection = DriverManager.getConnection(dbURL, usernamedb, passworddb);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            //"SELECT Username, reserve_limit FROM USER WHERE Username = '"+userReservingString+"'";
+            out = "SELECT date, Interaction FROM loghistory WHERE success = '"+"1"+"'";
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(out);
+            //out = rs.getString("date") + ":   " + rs.getString("Interaction") + "\n";
+
+            out = null + "\n";
+            if (rs.next() == false) {
+                System.out.println("ResultSet in empty in Java");
+            } else {
+
+                do {
+                    out = out + rs.getString("date") + ":   " + rs.getString("Interaction") + "\n";
+                } while (rs.next());
+            }
+
+            System.out.println(out);
             return out;
         }
 
@@ -600,12 +642,106 @@ public class GreetingServer extends Thread
                     DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
                     Date date = new Date();
                     String logit = "INSERT INTO loghistory(username,date,Interaction, success) VALUES('" + username + "','"
-                            + dateFormat.format(date) + "','" + "Searched for Gates at time " + convertit(Integer.parseInt(converttime(timeslot))) + "','1')";
+                            + dateFormat.format(date) + "','" + "Searched for Gates at time " + convertit(Integer.parseInt(converttime(timeslot))) + "','0')";
                     Statement logitstmt = connection.createStatement();
                     logitstmt.executeUpdate(logit);
                     return out;
                 }
 
+
+
+
+            }
+
+            public boolean removeReservation (String username, String gate, String timeslot)  throws SQLException
+            {
+                String Gate = null;
+                if(gate != null) {
+                    int GATEINT = Integer.parseInt(gate);
+
+                    if (GATEINT == 1) {
+                        Gate = "Gate_one";
+                    } else if (GATEINT == 2) {
+                        Gate = "Gate_two";
+                    } else if (GATEINT == 3) {
+                        Gate = "Gate_three";
+                    } else if (GATEINT == 4) {
+                        Gate = "Gate_four";
+                    } else if (GATEINT == 5) {
+                        Gate = "Gate_five";
+                    } else if (GATEINT == 6) {
+                        Gate = "Gate_six";
+                    } else if (GATEINT == 7) {
+                        Gate = "Gate_seven";
+                    } else if (GATEINT == 8) {
+                        Gate = "Gate_eight";
+                    } else if (GATEINT == 9) {
+                        Gate = "Gate_nine";
+                    } else if (GATEINT == 10) {
+                        Gate = "Gate_ten";
+                    }
+
+                }
+                else
+                {
+                    System.out.println("weird error check if this happens");
+                    return false;
+                }
+
+                String dbname = "airportdb";
+                String usernamedb = "root";
+                String passworddb = "";
+                //Creating Connection
+                Connection connection = null;
+                try {
+                    connection = DriverManager.getConnection(dbURL, usernamedb, passworddb);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+
+
+
+
+                String ReserveLimit = "SELECT Username, reserve_limit FROM USER WHERE Username = '" + username + "'";
+                Statement res = connection.createStatement();
+                ResultSet rs1 = res.executeQuery(ReserveLimit);
+                rs1.next();
+
+                //CONVERTING STRING TO INTEGER
+                int how_many = Integer.parseInt(rs1.getString("reserve_limit"));
+                how_many--;
+
+                if(how_many >= 0 ) {
+
+                    String limit = "UPDATE USER SET reserve_limit = '" + how_many + "' WHERE Username = '" + username + "' ";
+                    Statement li = connection.createStatement();
+                    li.executeUpdate(limit);
+                    String out = "UPDATE gates SET " + Gate + " = 1 WHERE Time_slot = '" + Integer.parseInt(timeslot) * 4 + "'";
+                    Statement stmt = connection.createStatement();
+                    stmt.executeUpdate(out);
+
+                    DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                    Date date = new Date();
+                    String logit = "INSERT INTO loghistory(username,date,Interaction, success) " +
+                            "VALUES('" + username + "','" + dateFormat.format(date) + "','" + "Removing your reservation" +
+                            " for  " + Gate + " at time " + convertit(Integer.parseInt(timeslot) * 4) + "','0')";
+                    Statement logitstmt = connection.createStatement();
+                    logitstmt.executeUpdate(logit);
+
+                    //System.out.println("REMOVE THIS: Reserving " + Gate + " at time " + convertit(Integer.parseInt(timeslot)*4));
+
+                    String remo = "UPDATE loghistory SET success = 0 WHERE Username = '"+username+"' AND Interaction = '"+"Reserving " + Gate + " at time "
+                    + convertit(Integer.parseInt(timeslot)*4)+"'";
+                    Statement stt = connection.createStatement();
+                    stt.executeUpdate(remo);
+
+
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
 
 
 

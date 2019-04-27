@@ -8,34 +8,40 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.R_Controller">
+<AnchorPane id="pane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../style.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.R_Controller">
    <children>
-      <Text layoutX="147.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
+      <Text fill="WHITE" layoutX="235.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
          <font>
             <Font size="19.0" />
          </font>
       </Text>
-      <Text layoutX="150.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password">
+      <Text fill="WHITE" layoutX="240.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password">
          <font>
             <Font size="19.0" />
          </font>
       </Text>
-      <TextField fx:id="R_Email" layoutX="260.0" layoutY="107.0" promptText="ex. abc123" />
-      <Text layoutX="124.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Register for a new account here">
+      <TextField fx:id="R_Email" layoutX="334.0" layoutY="79.0" promptText="ex. abc123" />
+      <Text fill="WHITE" layoutX="120.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Register for a new account here">
          <font>
             <Font size="27.0" />
          </font>
       </Text>
-      <Text layoutX="147.0" layoutY="245.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Full Name">
+      <Text fill="WHITE" layoutX="237.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Full Name">
          <font>
             <Font size="19.0" />
          </font>
       </Text>
-      <PasswordField fx:id="R_Password" layoutX="260.0" layoutY="167.0" promptText="Password" />
-      <TextField fx:id="R_Name" layoutX="260.0" layoutY="225.0" promptText="ex. John Doe" />
-      <CheckBox fx:id="NotRobot" layoutX="181.0" layoutY="275.0" mnemonicParsing="false" text="Check here to confirm you are not a robot" />
-      <Button layoutX="304.0" layoutY="339.0" mnemonicParsing="false" onAction="#submit" text="Register" />
+      <PasswordField fx:id="R_Password" layoutX="334.0" layoutY="118.0" promptText="Password" />
+      <PasswordField fx:id="ConfirmPass" layoutX="334.0" layoutY="152.0" promptText="Re-Enter Password" />
+      <TextField fx:id="R_Name" layoutX="334.0" layoutY="187.0" promptText="ex. John Doe" />
+      <CheckBox fx:id="NotRobot" layoutX="246.0" layoutY="225.0" mnemonicParsing="false" text="Check here to confirm you are not a robot" textFill="WHITE" />
+      <Button layoutX="378.0" layoutY="314.0" mnemonicParsing="false" onAction="#submit" text="Register" />
       <Button layoutX="26.0" layoutY="352.0" mnemonicParsing="false" onAction="#Back2Login" text="Back" />
-      <Text fx:id="indicator" layoutX="212.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="200.800048828125" />
+      <Text fx:id="indicator" fill="WHITE" layoutX="291.0" layoutY="277.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="200.800048828125" />
+      <Text fill="WHITE" layoutX="170.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirm Password">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

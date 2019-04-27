@@ -5,14 +5,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.REG_SUCCESS_Controller">
+<AnchorPane id="pane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../style.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.REG_SUCCESS_Controller">
    <children>
-      <Text layoutX="46.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You Have Registered Successfully">
+      <Text fill="WHITE" layoutX="58.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You Have Registered Successfully">
          <font>
             <Font name="Arial Black" size="27.0" />
          </font>
       </Text>
-      <Button fx:id="Back2Login" layoutX="226.0" layoutY="258.0" mnemonicParsing="false" onAction="#GoToLogin" text="Go Back To Login Screen" />
+      <Button fx:id="Back2Login" layoutX="238.0" layoutY="187.0" mnemonicParsing="false" onAction="#GoToLogin" text="Go Back To Login Screen" />
    </children>
 </AnchorPane>

@@ -27,6 +27,7 @@ public class R_Controller {
     public CheckBox NotRobot;
     public Text indicator;
     private Socket client;
+    public PasswordField ConfirmPass;
     private boolean reg = false;
     public void Back2Login (ActionEvent goback) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("javafx.fxml"));
@@ -39,11 +40,16 @@ public class R_Controller {
     public void submit (ActionEvent sub) throws Exception {
 
 
+        String pass = R_Password.getText();
+        String conf = ConfirmPass.getText();
 
-        if (R_Email.getText().isEmpty() || R_Name.getText().isEmpty() || R_Password.getText().isEmpty())
+
+
+        if (R_Email.getText().isEmpty() || R_Name.getText().isEmpty() || R_Password.getText().isEmpty() || ConfirmPass.getText().isEmpty())
         {
             disError("One or more fields is empty");
         }
+
         else if (!R_Name.getText().matches("^[ A-Za-z]+$"))
         {
             disError("Your name has an invalid character in it");
@@ -59,6 +65,11 @@ public class R_Controller {
         else if (R_Password.getText().matches("[a-zA-Z]*$"))
         {
             disError("Password should include numbers");
+        }
+        else if (!pass.equalsIgnoreCase(conf))
+        {
+            //System.out.println(R_Password.getText() + ConfirmPass.getText() + "debug here");
+            disError("Passwords don't match!");
         }
         else if (!NotRobot.isSelected())
         {

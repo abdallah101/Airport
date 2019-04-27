@@ -10,7 +10,7 @@
 
 <AnchorPane id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../style.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Ports_Controller">
    <children>
-      <Text fill="WHITE" layoutX="185.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to THE Airport">
+      <Text fx:id="welcome" fill="WHITE" layoutX="185.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to THE Airport">
          <font>
             <Font name="Times New Roman Bold" size="22.0" />
          </font>
@@ -21,7 +21,7 @@
       <Button layoutX="421.0" layoutY="187.0" mnemonicParsing="false" onAction="#CtimeSlots" text="Reserve time slot" />
       <ComboBox fx:id="timebox" layoutX="375.0" layoutY="140.0" onAction="#ChangeTimeSlot" prefHeight="26.0" prefWidth="200.0" promptText="Select Time Slot" />
       <Button layoutX="528.0" layoutY="14.0" mnemonicParsing="false" onAction="#refresh" text="Refresh" />
-      <Text fx:id="reserve_success" layoutX="360.0" layoutY="245.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="230.34472167491913" />
+      <Text fx:id="reserve_success" fill="WHITE" layoutX="360.0" layoutY="245.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="230.34472167491913" />
       <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#History" text="History" />
       <ListView fx:id="listview" layoutX="76.0" layoutY="126.0" prefHeight="200.0" prefWidth="191.0" />
       <Button layoutX="234.0" layoutY="88.0" mnemonicParsing="false" onAction="#GO" text="Go" />

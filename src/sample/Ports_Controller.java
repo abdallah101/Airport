@@ -37,7 +37,7 @@ public class Ports_Controller implements Initializable {
     public TextField STime_slot;
     public ListView listview;
     private User currentUser ;
-
+    public Text welcome;
     public void loadUserData(User CU)
     {
         this.currentUser = CU;
@@ -76,6 +76,7 @@ public class Ports_Controller implements Initializable {
     public void refresh ()
     {
 
+        welcome.setText("Welcome " + currentUser.getUsername() + " to THE Airport");
         //System.out.println("");
         String serverName = "localhost";
         int port = Integer.parseInt("6066");
@@ -91,42 +92,41 @@ public class Ports_Controller implements Initializable {
 
             //Getting input
             DataInputStream in = new DataInputStream(client.getInputStream());
-            System.out.println(in.available());
             String re = in.readUTF();
 
             BufferedReader reader = new BufferedReader(new StringReader(re));
             String next = reader.readLine();
 
             listview.getItems().clear();
-            list1.clear();
+
             Label l = new Label("Input a number between\n0 and 24, Gates\ncorresponding " +
                     "to a time\ninterval with that number\nin it will be displayed");
             l.setOpacity(10);
             listview.setPlaceholder(l);
+
+            //Generating available time slots for shown gates
+            list1.clear();
             while (true)
             {
                 next = reader.readLine();
                 if(Integer.parseInt(next) == 222)
                 {break;}
                 list1.addAll(convertit(Integer.parseInt(next)));
-            }
-            list2.clear();
+            } list2.clear();
             while (true)
             {
                 next = reader.readLine();
                 if(Integer.parseInt(next) == 333)
                 {break;}
                 list2.addAll(convertit(Integer.parseInt(next)));
-            }
-            list3.clear();
+            } list3.clear();
             while (true)
             {
                 next = reader.readLine();
                 if(Integer.parseInt(next) == 444)
                 {break;}
                 list3.addAll(convertit(Integer.parseInt(next)));
-            }
-            list4.clear();
+            } list4.clear();
             while (true)
             {
                 next = reader.readLine();
@@ -180,7 +180,7 @@ public class Ports_Controller implements Initializable {
             out.close();
             in.close();
             client.close();
-            System.out.println("Refreshed");
+            //System.out.println("Refreshed");
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -190,16 +190,12 @@ public class Ports_Controller implements Initializable {
 
 
             String result = GetRes();
-
-            System.out.println(result);
             BufferedReader r = new BufferedReader(new StringReader(result));
-
             r.readLine();
             String reservations = r.readLine();
-
-
-            System.out.println("Seeing reservations: " + reservations);
             reservedTime.clear();
+
+            //Generating reserved Gates/time slots
             while (reservations != null)
             {
 
@@ -349,14 +345,10 @@ public class Ports_Controller implements Initializable {
                     {reservedTime.addAll("Gate ten 8pm to 12am");}}
                 reservations = r.readLine();
             }
-
-            //removeRes.getItems().clear();
             removeRes.setItems(reservedTime);
 
         }catch (IOException e)
         {e.printStackTrace();}
-
-
     }
 
 
@@ -593,7 +585,6 @@ public class Ports_Controller implements Initializable {
             OutputStream outToServer = client.getOutputStream();
             DataOutputStream out = new DataOutputStream(outToServer);
             out.writeUTF("5" + "\n" + currentUser.getUsername());
-            System.out.println("here");
             //Getting input
             DataInputStream in = new DataInputStream(client.getInputStream());
             String re = in.readUTF();
@@ -743,7 +734,8 @@ public class Ports_Controller implements Initializable {
         {
             disError("Select a gate first");
         }
-        else {
+        else
+            {
             combobox.setValue(listview.getSelectionModel().getSelectedItem().toString());
             if(combobox.getValue() == "Gate one") {
                 GATE = "1";

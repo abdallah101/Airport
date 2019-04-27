@@ -42,7 +42,7 @@ public class GreetingServer extends Thread
         timer.cancel();
         timer = new Timer("TaskName");
         Date executionDate = new Date(); // no params = now
-        timer.scheduleAtFixedRate(task, delay, delay);
+        timer.scheduleAtFixedRate(task, executionDate, delay);
         try {
             serverSocket = new ServerSocket(port);
             //serverSocket.setSoTimeout(1000000);
@@ -540,7 +540,7 @@ public class GreetingServer extends Thread
             }
 
             //"SELECT Username, reserve_limit FROM USER WHERE Username = '"+userReservingString+"'";
-            out = "SELECT date, Interaction FROM loghistory WHERE success = '"+"1"+"'";
+            out = "SELECT date, Interaction FROM loghistory WHERE Username = '"+username+"' AND success = '"+"1"+"'";
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(out);
             //out = rs.getString("date") + ":   " + rs.getString("Interaction") + "\n";
@@ -608,27 +608,27 @@ public class GreetingServer extends Thread
                     {
                         out = out + "3" +"\n";
                     }
-                    if (Integer.parseInt(rs.getString("Gate_four")) == 1)
+                    if (Integer.parseInt(rs.getString("Gate_five")) == 1)
                     {
                         out = out + "4" +"\n";
                     }
-                    if (Integer.parseInt(rs.getString("Gate_four")) == 1)
+                    if (Integer.parseInt(rs.getString("Gate_six")) == 1)
                     {
                         out = out + "5" +"\n";
                     }
-                    if (Integer.parseInt(rs.getString("Gate_four")) == 1)
+                    if (Integer.parseInt(rs.getString("Gate_seven")) == 1)
                     {
                         out = out + "6" +"\n";
                     }
-                    if (Integer.parseInt(rs.getString("Gate_four")) == 1)
+                    if (Integer.parseInt(rs.getString("Gate_eight")) == 1)
                     {
                         out = out + "7" +"\n";
                     }
-                    if (Integer.parseInt(rs.getString("Gate_four")) == 1)
+                    if (Integer.parseInt(rs.getString("Gate_nine")) == 1)
                     {
                         out = out + "8" +"\n";
                     }
-                    if (Integer.parseInt(rs.getString("Gate_four")) == 1)
+                    if (Integer.parseInt(rs.getString("Gate_ten")) == 1)
                     {
                         out = out + "9" +"\n";
                     }

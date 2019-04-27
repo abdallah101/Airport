@@ -42,7 +42,7 @@ public class GreetingServer extends Thread
         timer.cancel();
         timer = new Timer("TaskName");
         Date executionDate = new Date(); // no params = now
-        timer.scheduleAtFixedRate(task, executionDate, delay);
+        timer.scheduleAtFixedRate(task, delay, delay);
         try {
             serverSocket = new ServerSocket(port);
             //serverSocket.setSoTimeout(1000000);

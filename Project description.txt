@@ -1,0 +1,12 @@
+Implementation of an airport parking system:
+
+- Allowing users to register and login in to their accounts
+- Allow users to see all their previous server interactions
+- Account settings
+- Reserve airport parking slot that is available and with restrictions
+
+
+****************************************************************************
+
+Java, Javafx, MySql, Scenebuilder, server-socket programming (client-server model) where 
+used to build this application.
